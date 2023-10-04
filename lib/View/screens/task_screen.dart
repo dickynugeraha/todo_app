@@ -8,6 +8,7 @@ import 'package:todo_apps/Services/task_service.dart';
 import 'package:todo_apps/View/widgets/main_drawer.dart';
 import 'package:todo_apps/View/widgets/task_filter_drawer.dart';
 import 'package:todo_apps/View/widgets/task_item.dart';
+import 'package:todo_apps/View/widgets/task_list_widget.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -32,15 +33,24 @@ class _TaskScreenState extends State<TaskScreen> {
     super.didChangeDependencies();
   }
 
+  Map<String, dynamic> _filters = {
+    "isAll": true,
+    "isCompleted": false,
+    "isUncompleted": false,
+    "priority": "All",
+    "deadline": "",
+  };
+
+  void taskFilterHandler(Map<String, dynamic> filterData) {
+    setState(() {
+      _filters = filterData;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final task = Provider.of<TaskProvider>(context);
-    final tasks = task.tasks;
-
-    void taskFilterHandler(String priorityFilter, String deadlineFilter) {
-      print(priorityFilter);
-      print(deadlineFilter);
-    }
+    List<Task> tasks = task.tasks;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -57,7 +67,10 @@ class _TaskScreenState extends State<TaskScreen> {
         ],
       ),
       drawer: const MainDrawer(),
-      endDrawer: TaskFilterDrawer(onFilter: taskFilterHandler),
+      endDrawer: TaskFilterDrawer(
+        currentFilter: _filters,
+        onFilter: taskFilterHandler,
+      ),
       body: _isLoading
           ? Center(
               child: LoadingAnimationWidget.staggeredDotsWave(
@@ -65,24 +78,25 @@ class _TaskScreenState extends State<TaskScreen> {
                 size: 50,
               ),
             )
-          : GridView(
-              padding: const EdgeInsets.all(20),
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 1.5,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-              ),
-              children: tasks
-                  .map(
-                    (e) => TaskItem(
-                      id: e.id,
-                      title: e.title,
-                      isCompleted: e.isCompleted,
-                    ),
-                  )
-                  .toList(),
-            ),
+          : TaskList(filtered: _filters),
+      // GridView(
+      //     padding: const EdgeInsets.all(20),
+      //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+      //       maxCrossAxisExtent: 200,
+      //       childAspectRatio: 1.5,
+      //       crossAxisSpacing: 20,
+      //       mainAxisSpacing: 20,
+      //     ),
+      //     children: tasks
+      //         .map(
+      //           (e) => TaskItem(
+      //             id: e.id,
+      //             title: e.title,
+      //             isCompleted: e.isCompleted,
+      //           ),
+      //         )
+      //         .toList(),
+      //   ),
     );
   }
 }
