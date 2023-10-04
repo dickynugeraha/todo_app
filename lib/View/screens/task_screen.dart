@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_apps/Models/Task.dart';
 import 'package:todo_apps/Services/task_service.dart';
 import 'package:todo_apps/View/widgets/main_drawer.dart';
 import 'package:todo_apps/View/widgets/task_filter_drawer.dart';
-import 'package:todo_apps/View/widgets/task_item.dart';
 import 'package:todo_apps/View/widgets/task_list_widget.dart';
 
 class TaskScreen extends StatefulWidget {
@@ -25,7 +23,7 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<TaskProvider>(context, listen: false).getTasks().then(
+      Provider.of<TaskProvider>(context).getTasks().then(
             (value) => _isLoading = false,
           );
     }
@@ -49,9 +47,6 @@ class _TaskScreenState extends State<TaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final task = Provider.of<TaskProvider>(context);
-    List<Task> tasks = task.tasks;
-
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(

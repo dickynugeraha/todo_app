@@ -18,24 +18,28 @@ class TaskList extends StatelessWidget {
     tasks = tasks.where((task) {
       if (filtered["isAll"]) {
         return true;
-      } else {
-        if (filtered["isCompleted"] && !task.isCompleted) {
+      }
+      if (filtered["isCompleted"] && !task.isCompleted) {
+        return false;
+      }
+      if (filtered["isUncompleted"] && task.isCompleted) {
+        return false;
+      }
+      if (filtered["deadline"] != "") {
+        if (task.deadline != filtered["deadline"]) {
           return false;
         }
-        if (filtered["isUncompleted"] && task.isCompleted) {
-          return false;
-        }
-        if (filtered["deadline"] != "") {
-          if (task.deadline != filtered["deadline"]) {
-            return false;
-          }
-        }
+      }
+      if (filtered["priority"] != "All") {
         if (task.priority != filtered["priority"]) {
           return false;
         }
       }
       return true;
     }).toList();
+
+    print(filtered);
+    print(tasks.length);
 
     return GridView(
       padding: const EdgeInsets.all(20),

@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_apps/Services/task_service.dart';
 
 import 'package:todo_apps/View/widgets/global_widget.dart';
-import 'package:todo_apps/View/widgets/task_item.dart';
 
 class NewTaskScreen extends StatefulWidget {
   final String taskId;

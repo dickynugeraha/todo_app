@@ -75,7 +75,7 @@ class _TaskFilterDrawerState extends State<TaskFilterDrawer> {
                   title: "Completed task",
                   currentValue: isCompletedFilter,
                   updateValue: (newValue) {
-                    if (isAllFilter) {
+                    if (isAllFilter || isUncompletedFilter) {
                       return;
                     }
                     setState(() {
@@ -87,7 +87,7 @@ class _TaskFilterDrawerState extends State<TaskFilterDrawer> {
                   title: "Uncompleted task",
                   currentValue: isUncompletedFilter,
                   updateValue: (newValue) {
-                    if (isAllFilter) {
+                    if (isAllFilter || isCompletedFilter) {
                       return;
                     }
                     setState(() {

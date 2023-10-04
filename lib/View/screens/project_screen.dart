@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_apps/Models/Project.dart';
-import 'package:todo_apps/View/widgets/global_widget.dart';
 import 'package:todo_apps/View/widgets/main_drawer.dart';
 import 'dart:math';
 
