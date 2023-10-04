@@ -79,24 +79,6 @@ class _TaskScreenState extends State<TaskScreen> {
               ),
             )
           : TaskList(filtered: _filters),
-      // GridView(
-      //     padding: const EdgeInsets.all(20),
-      //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-      //       maxCrossAxisExtent: 200,
-      //       childAspectRatio: 1.5,
-      //       crossAxisSpacing: 20,
-      //       mainAxisSpacing: 20,
-      //     ),
-      //     children: tasks
-      //         .map(
-      //           (e) => TaskItem(
-      //             id: e.id,
-      //             title: e.title,
-      //             isCompleted: e.isCompleted,
-      //           ),
-      //         )
-      //         .toList(),
-      //   ),
     );
   }
 }
