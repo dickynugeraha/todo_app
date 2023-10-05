@@ -62,8 +62,7 @@ class _TaskFilterDrawerState extends State<TaskFilterDrawer> {
                   updateValue: (newValue) {
                     if (isCompletedFilter ||
                         isUncompletedFilter ||
-                        priorityFilter != "All" ||
-                        deadlineFilter.isNotEmpty) {
+                        priorityFilter != "All") {
                       return;
                     }
                     setState(() {
