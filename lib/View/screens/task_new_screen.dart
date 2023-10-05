@@ -56,6 +56,12 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     }
     formKey.currentState!.save();
 
+    if (initialvalue["title"] == "" ||
+        initialvalue["priority"] == "Null" ||
+        initialvalue["deadline"] == "") {
+      return;
+    }
+
     setState(() {
       isLoading = true;
     });
