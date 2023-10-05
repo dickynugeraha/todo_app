@@ -38,26 +38,27 @@ class TaskList extends StatelessWidget {
       return true;
     }).toList();
 
-    print(filtered);
-    print(tasks.length);
-
-    return GridView(
-      padding: const EdgeInsets.all(20),
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
-        childAspectRatio: 1.5,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-      ),
-      children: tasks
-          .map(
-            (e) => TaskItem(
-              id: e.id,
-              title: e.title,
-              isCompleted: e.isCompleted,
-            ),
+    return tasks.isEmpty
+        ? const Center(
+            child: Text("Task not found!"),
           )
-          .toList(),
-    );
+        : GridView(
+            padding: const EdgeInsets.all(20),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 1.5,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+            ),
+            children: tasks
+                .map(
+                  (e) => TaskItem(
+                    id: e.id,
+                    title: e.title,
+                    isCompleted: e.isCompleted,
+                  ),
+                )
+                .toList(),
+          );
   }
 }

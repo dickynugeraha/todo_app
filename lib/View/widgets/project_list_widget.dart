@@ -35,13 +35,13 @@ class ProjectList extends StatelessWidget {
 
     return SizedBox(
       height: deviceSize.height * 0.82,
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: items.isEmpty
-            ? const Center(
-                child: Text("Project not found!"),
-              )
-            : Column(
+      child: items.isEmpty
+          ? const Center(
+              child: Text("Project not found!"),
+            )
+          : SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
                 children: items
                     .map(
                       (e) => ProjectItem(
@@ -90,7 +90,7 @@ class ProjectList extends StatelessWidget {
                     )
                     .toList(),
               ),
-      ),
+            ),
     );
   }
 }
